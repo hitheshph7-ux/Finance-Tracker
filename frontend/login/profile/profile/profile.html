@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <div class="profile-card">
+
+        <h1>My Profile</h1>
+
+        <p>
+            <strong>Name:</strong>
+            <span id="displayName"></span>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <span id="displayEmail"></span>
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            <span id="displayPhone"></span>
+        </p>
+
+        <p>
+            <strong>Occupation:</strong>
+            <span id="displayOccupation"></span>
+        </p>
+
+        <p>
+            <strong>Income:</strong>
+            ₹<span id="displayIncome"></span>
+        </p>
+
+        <div class="profile-actions">
+            <a href="edit-profile.html" class="edit-link">Edit</a>
+            <a href="index.html" class="dashboard-link">Dashboard</a>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+        
+    </div>
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

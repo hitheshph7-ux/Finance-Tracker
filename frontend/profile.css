@@ -1,0 +1,78 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+.profile-card {
+    width: 400px;
+    padding: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card h1 {
+    color: black;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-card p {
+    color: black;
+    font-size: 18px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-card strong {
+    color: black;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.edit-link, .dashboard-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(14, 14, 195);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.dashboard-link {
+    background-color: #555555;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #222222;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.edit-link:hover, .dashboard-link:hover, .logout-btn:hover {
+    opacity: 0.9;
+}

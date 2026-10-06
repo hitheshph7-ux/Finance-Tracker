@@ -1,0 +1,89 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+}
+
+.title {
+    position: absolute;
+    color: black;
+    top: 20px;
+    left: 20px;
+}
+
+.cont {
+    width: 350px;
+    padding: 40px;
+    border: 0.5px solid black;
+    background-color: white;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#email,
+#password {
+    width: 250px;
+    height: 50px;
+    box-sizing: border-box;
+    color: #000000;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 0 15px;
+    font-size: 15px;
+    outline: none;
+}
+
+button {
+    background-color: rgb(14, 14, 195);
+    color: white;
+    border: 0.5px solid black;
+    border-radius: 25px;
+    padding: 15px 90px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(10, 10, 150);
+}
+
+#email::placeholder,
+#password::placeholder {
+    color: rgb(15, 15, 15);
+    font-size: medium;
+    font-weight: 100;
+    opacity: 1;
+}
+
+h1 {
+    font-weight: 100;
+    color: black;
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: red;
+    text-align: center;
+}
+
+.register-text {
+    color: black;
+    margin-top: 15px;
+}
+
+.register-text a {
+    color: blue;
+}

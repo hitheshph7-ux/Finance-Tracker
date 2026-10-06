@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker - Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">💰</span>
+            <span class="logo-text">Finance Tracker</span>
+        </div>
+
+        <div class="user-status-bar">
+            <a href="profile.html" class="user-badge" title="View Profile" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <span class="avatar-icon">👤</span>
+                <span id="currentUserName">User</span>
+            </a>
+            <button onclick="logoutUser()" class="logout-nav-btn" title="Logout">
+                🚪 Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Header / Welcome Banner -->
+        <header class="welcome-header">
+            <div>
+                <h1>Welcome Back, <span id="displayUsername" class="accent-text">User</span> 👋</h1>
+                <p>Track your income, control expenses, and manage your budget all in one place.</p>
+            </div>
+            <div class="date-display" id="todayDate"></div>
+        </header>
+
+        <!-- Summary Metrics Dashboard -->
+        <section class="metrics-grid">
+            <div class="metric-card income-card">
+                <div class="metric-icon">📈</div>
+                <div class="metric-info">
+                    <h3>Total Income</h3>
+                    <p class="amount">₹<span id="totalIncome">0.00</span></p>
+                </div>
+            </div>
+
+            <div class="metric-card expense-card">
+                <div class="metric-icon">📉</div>
+                <div class="metric-info">
+                    <h3>Total Expenses</h3>
+                    <p class="amount">₹<span id="totalExpense">0.00</span></p>
+                </div>
+            </div>
+
+            <div class="metric-card balance-card">
+                <div class="metric-icon">💳</div>
+                <div class="metric-info">
+                    <h3>Net Balance</h3>
+                    <p class="amount">₹<span id="netBalance">0.00</span></p>
+                </div>
+            </div>
+
+            <div class="metric-card total-card">
+                <div class="metric-icon">📊</div>
+                <div class="metric-info">
+                    <h3>Total Transactions</h3>
+                    <p class="amount" id="totalRecords">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Forms Section: Grid of Add Income, Add Expense -->
+        <section class="forms-grid">
+            
+            <!-- Add Income Card -->
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2><span class="icon">➕</span> Add Income</h2>
+                </div>
+                <form id="incomeForm" onsubmit="handleAddIncome(event)">
+                    <div class="form-group">
+                        <label for="incomeSource">Income Source</label>
+                        <input type="text" id="incomeSource" placeholder="e.g. Salary, Freelance" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="incomeAmount">Amount (₹)</label>
+                            <input type="number" id="incomeAmount" placeholder="e.g. 50000" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeDate">Date</label>
+                            <input type="date" id="incomeDate">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-emerald">Add Income</button>
+                </form>
+            </div>
+
+            <!-- Add Expense Card -->
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2><span class="icon">💸</span> Add Expense</h2>
+                </div>
+                <form id="expenseForm" onsubmit="handleAddExpense(event)">
+                    <div class="form-group">
+                        <label for="expenseCategorySelect">Category</label>
+                        <div class="select-with-btn">
+                            <select id="expenseCategorySelect" required>
+                                <option value="">Select Category...</option>
+                            </select>
+                            <button type="button" class="btn-sm btn-secondary" onclick="openCategoryModal()">+ Category</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expenseDescription">Description / Title</label>
+                        <input type="text" id="expenseDescription" placeholder="e.g. Groceries, Dinner, Electricity" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expenseAmount">Amount (₹)</label>
+                            <input type="number" id="expenseAmount" placeholder="e.g. 1500" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseDate">Date</label>
+                            <input type="date" id="expenseDate">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-rose">Add Expense</button>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- Transaction History Section -->
+        <section class="card history-section">
+            <div class="card-header-flex">
+                <div>
+                    <h2><span class="icon">📜</span> Transaction History</h2>
+                    <p class="subtitle">Filter history by type or specific category</p>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <!-- Type Filter Tabs -->
+                    <div class="btn-group">
+                        <button class="filter-btn active" data-filter="all" onclick="filterTransactions('all', this)">All</button>
+                        <button class="filter-btn" data-filter="income" onclick="filterTransactions('income', this)">Income</button>
+                        <button class="filter-btn" data-filter="expense" onclick="filterTransactions('expense', this)">Expenses</button>
+                    </div>
+
+                    <!-- Category Filter Dropdown -->
+                    <div class="category-filter-box">
+                        <label for="categoryFilterSelect">Filter Category:</label>
+                        <select id="categoryFilterSelect" onchange="filterByCategory(this.value)">
+                            <option value="all">All Categories</option>
+                            <!-- Options populated dynamically -->
+                        </select>
+                    </div>
+
+                    <button class="btn-sm btn-outline" onclick="loadAllData()" title="Refresh">🔄 Refresh</button>
+                </div>
+            </div>
+
+            <!-- Filter Status Banner -->
+            <div id="filterBanner" class="filter-banner hidden">
+                <span>Showing history for category: <strong id="selectedCategoryName">All</strong></span>
+                <button class="btn-clear-filter" onclick="clearCategoryFilter()">Clear Filter &times;</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description / Source</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTableBody">
+                        <tr>
+                            <td colspan="6" class="text-center">Loading transactions...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal: Add Category -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content card">
+            <span class="close-btn" onclick="closeCategoryModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Manage Categories</h2>
+            </div>
+            <form id="categoryForm" onsubmit="handleAddCategory(event)">
+                <div class="form-group">
+                    <label for="newCategoryName">New Category Name</label>
+                    <div class="input-with-btn">
+                        <input type="text" id="newCategoryName" placeholder="e.g. Food & Dining, Rent, Travel" required>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </form>
+            <div class="category-list-section">
+                <h3>Existing Categories</h3>
+                <ul id="categoryList" class="category-pills-list">
+                    <!-- Populated dynamically -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Item -->
+    <div id="editModal" class="modal">
+        <div class="modal-content card">
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="editModalTitle">Edit Record</h2>
+            </div>
+            <form id="editForm" onsubmit="handleSaveEdit(event)">
+                <input type="hidden" id="editItemType">
+                <input type="hidden" id="editItemId">
+
+                <div class="form-group" id="editCategoryGroup">
+                    <label for="editCategorySelect">Category</label>
+                    <select id="editCategorySelect">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editTitle" id="editTitleLabel">Source / Title</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editAmount">Amount (₹)</label>
+                        <input type="number" id="editAmount" min="0.01" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDate">Date</label>
+                        <input type="date" id="editDate" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

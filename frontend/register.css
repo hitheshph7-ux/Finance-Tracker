@@ -1,0 +1,83 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+
+.title {
+    position: absolute;
+    color:black;
+    top: 20px;
+    left: 20px;
+}
+
+
+.cont {
+    width: 350px;
+    padding: 40px;
+    border: 0.5px solid black;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#name,
+#email,
+#password,
+#confirmPassword {
+    width: 250px;
+    height: 50px;
+    box-sizing: border-box;
+    color: #000000;
+    background-color:white;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 10px;
+    margin-bottom: 15px;
+
+}
+
+
+#name::placeholder,
+#email::placeholder,
+#password::placeholder,
+#confirmPassword::placeholder {
+    color:black;
+    opacity: 1;
+}
+
+
+button {
+    width: 250px;
+    height: 50px;
+    background-color: rgb(14, 14, 195);
+    color: white;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+
+h1 {
+    font-weight: 100;
+    color:black;
+}
+
+
+.register-text {
+    color:black;
+}
+
+
+.register-text a {
+    color: blue;
+}

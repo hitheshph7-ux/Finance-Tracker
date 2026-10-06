@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -32,7 +33,7 @@ class Income(models.Model):
     )
 
     date = models.DateField(
-        auto_now_add=True
+        default=timezone.now
     )
 
     def __str__(self):
@@ -62,7 +63,7 @@ class Expense(models.Model):
     )
 
     date = models.DateField(
-        auto_now_add=True
+        default=timezone.now
     )
 
     def __str__(self):
